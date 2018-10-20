@@ -5,7 +5,7 @@ simple flashcard app
 
 ### App Walk-though
 
-<img src="https://imgur.com/a/omuTs2m" width=200><br>
+<img src="https://imgur.com/a/omuTs2m.gif" width=200><br>
 https://imgur.com/a/omuTs2m
 
 ## Required
