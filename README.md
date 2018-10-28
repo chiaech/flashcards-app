@@ -5,8 +5,7 @@ simple flashcard app
 
 ### App Walk-though
 
-<img src="https://imgur.com/a/omuTs2m.gif" width=200><br>
-https://imgur.com/a/omuTs2m
+<img src="https://github.com/chiaech/flashcards-app/raw/master/flashcard-App-gif.gif" width=200><br>
 
 ## Required
 - [x] User can open the creation screen
