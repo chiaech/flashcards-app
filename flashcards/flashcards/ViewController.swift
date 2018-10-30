@@ -57,7 +57,9 @@ class ViewController: UIViewController {
     
     func updateFlashcard(question: String, answer: String){
        frontLabel.text = question
+        option1.setTitle(answer2, for: .normal)
         option2.setTitle(answer, for: .normal)
+        option3.setTitle(answer3, for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -69,6 +71,11 @@ class ViewController: UIViewController {
         
         //we set the flashcardsController property to self
         creationController.flashcardsController = self
+        
+        if segue.identifier == "EditSegue"{
+        creationController.initialQuestion = frontLabel.text
+        creationController.initialAnswer = backLabel.text
+        }
     }
     
     @IBAction func didTapOption1(_ sender: Any) {
