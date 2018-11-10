@@ -7,7 +7,7 @@ simple flashcard app
 
 ### App Walk-though
 
-<img src="YOUR_GIF_URL_HERE" width=200><br>
+<img src="https://raw.githubusercontent.com/chiaech/flashcards-app/master/lab3.gif" width=200><br>
 
 ## Required
 - [x] User can browse through multiple flashcards
