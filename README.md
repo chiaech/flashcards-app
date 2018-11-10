@@ -12,9 +12,9 @@ simple flashcard app
 ## Required
 - [x] User can browse through multiple flashcards
 - [x] User can re-open the app and see previously created flashcards
-- [ ] Push code to GitHub
+- [x] Push code to GitHub
 ## Optional
-- [ ] User can delete a flashcard
+- [x] User can delete a flashcard
 - [x] User can edit existing flashcard
 - [x] User can store multiple choice questions
 
