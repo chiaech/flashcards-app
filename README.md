@@ -1,3 +1,25 @@
+## FLASHCARD APP
+
+## Lab 3
+
+### App Description
+simple flashcard app
+
+### App Walk-though
+
+<img src="YOUR_GIF_URL_HERE" width=200><br>
+
+## Required
+- [ ] User can browse through multiple flashcards
+- [ ] User can re-open the app and see previously created flashcards
+- [ ] Push code to GitHub
+## Optional
+- [ ] User can delete a flashcard
+- [ ] User can edit existing flashcard
+- [ ] User can store multiple choice questions
+
+
+
 ## Lab 2
 
 ### App Description
@@ -16,3 +38,21 @@ simple flashcard app
 - [x] User gets an error if they try to create a new flashcard with no question or answer
 - [x] User can edit existing flashcard
 - [x] User can add multiple choice answers in the creation screen
+
+
+
+## Lab 1
+
+### App Description
+simple flashcard app
+
+## Required
+- [x] Create New Project in Xcode
+- [x] Add a view for the front side of the flashcard to display the question
+- [x] Add a view for the back side of the flashcard to display the answer
+- [x] Build in logic to show the answer side when the card is tapped
+- [x] Push code to GitHub
+## Optional
+- [x] Toggle the flashcard between the question side and the answer side
+- [x] Style the question and answer side of the card to better distinguish between the two sides
+- [x] Add selectable multiple choice answers beneath the card
