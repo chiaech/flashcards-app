@@ -10,13 +10,13 @@ simple flashcard app
 <img src="YOUR_GIF_URL_HERE" width=200><br>
 
 ## Required
-- [ ] User can browse through multiple flashcards
+- [x] User can browse through multiple flashcards
 - [ ] User can re-open the app and see previously created flashcards
 - [ ] Push code to GitHub
 ## Optional
 - [ ] User can delete a flashcard
-- [ ] User can edit existing flashcard
-- [ ] User can store multiple choice questions
+- [x] User can edit existing flashcard
+- [x] User can store multiple choice questions
 
 
 
