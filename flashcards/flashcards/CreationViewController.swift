@@ -21,7 +21,6 @@ class CreationViewController: UIViewController {
         questionTextField.text = initialQuestion
         answerTextField.text = initialAnswer
     }
-   
     
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var answerTextField2: UITextField!
@@ -51,10 +50,18 @@ class CreationViewController: UIViewController {
             alert.addAction(okAction)
         }
         else {
-        //call the function to update the flashcard
-        flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, answer2: answerText2!, answer3: answerText3!)
-        
-        dismiss(animated: true)
+
+            var isExisting = false
+            //see if its existing
+            if initialQuestion != nil {
+                isExisting = true
+            }
+            
+            //call the function to update the flashcard
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, answer2: answerText2!, answer3: answerText3!, isExisting: false)
+            
+            dismiss(animated: true)
+        }
         
     }
     /*
