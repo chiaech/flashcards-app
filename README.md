@@ -1,3 +1,5 @@
+## FLASHCARD APP
+
 ## Lab 4
 
 ### App Description
@@ -20,7 +22,6 @@ simple flashcard app
 - [ ] User should see all views properly layout when using the app on a phone of different sizes
 - [ ] Correct answer in multiple choice should be random
 
-## FLASHCARD APP
 
 ## Lab 3
 
