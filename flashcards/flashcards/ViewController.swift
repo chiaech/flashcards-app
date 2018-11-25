@@ -34,7 +34,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var option2: UIButton!
     @IBOutlet weak var option3: UIButton!
     
-    override func viewDidLoad() {
+    //button to remember the correct anser
+    var correctAnswerButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        
+        //start with the flashcard invisible and slightly smaller in size
+        card.alpha = 0.0
+        card.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        //animation
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.card.alpha = 1.0
+            self.card.transform = CGAffineTransform.identity
+        })
+    }
+    
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         //read saved flashcards
@@ -42,6 +59,7 @@ class ViewController: UIViewController {
         
         viewSetup()
         
+        //change back to false
         if flashcards.count == 0 {
             updateFlashcard(question: "Who was the first man on the moon?", answer: "Niel Armstrong", answer2: "Barack Obama", answer3: "Frida Kahlo", isExisting: false)
             updateFlashcard(question: "Who is the best person ever?", answer: "Steven", answer2: "Steven", answer3: "Steven", isExisting: false)
@@ -52,6 +70,7 @@ class ViewController: UIViewController {
         }
         
     }
+    
     
     func viewSetup() {
         card.layer.cornerRadius = 20.0
@@ -80,12 +99,21 @@ class ViewController: UIViewController {
     }
 
     @IBAction func didTapOnFlashcard(_ sender: Any) {
-       if frontLabel.isHidden {
-        frontLabel.isHidden = false
-        }
-       else {
-        frontLabel.isHidden = true
-        }
+       flipFlashcard()
+    }
+    
+    func flipFlashcard(){
+        //Creates a transition animation for the specified container view
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            //self.frontLabel.isHidden = true
+            
+            if self.frontLabel.isHidden {
+                self.frontLabel.isHidden = false
+            }
+            else {
+                self.frontLabel.isHidden = true
+            }
+        })
     }
     
     @IBAction func didTapOnPrevious(_ sender: Any) {
@@ -97,6 +125,8 @@ class ViewController: UIViewController {
         
         //update buttons
         updateNextPreviousButtons()
+        
+        animateCardOut()
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
@@ -108,6 +138,28 @@ class ViewController: UIViewController {
         
         //update buttons
         updateNextPreviousButtons()
+        
+        animateCardOut()
+    }
+    
+    func animateCardOut(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }, completion: { finished in
+            self.updateLabels()
+            //run other animation
+            self.animateCardIn()
+        })
+    }
+    
+    func animateCardIn(){
+        //start on the right side (don't animate this)
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        
+        //animate card going back to its og position
+        UIView.animate(withDuration: 0.3) {
+            self.card.transform = CGAffineTransform.identity
+        }
     }
     
     @IBAction func didTapOnDelete(_ sender: Any) {
@@ -196,6 +248,26 @@ class ViewController: UIViewController {
         //update labels
         frontLabel.text = currentFlashcard.question
         backLabel.text = currentFlashcard.answer
+        
+        //update buttons to randomize
+        let randomButtons = [option1, option2, option3].shuffled()
+        let randomAnswers = [currentFlashcard.answer, currentFlashcard.answer2, currentFlashcard.answer3].shuffled()
+        
+        //zip() takes 2 arrays and creates pairs of elements from each array
+        //iterates over both arrays at the same time
+        for (button, answer) in zip(randomButtons, randomAnswers) {
+            //set title of random button with a random answer
+            button?.setTitle(answer, for: .normal)
+            
+            //if this is the correct answer, save the button
+            if answer == currentFlashcard.answer {
+                correctAnswerButton = button
+            }
+        }
+        //update buttons
+//        option1.setTitle(currentFlashcard.answer2, for: .normal)
+//        option2.setTitle(currentFlashcard.answer, for: .normal)
+//        option3.setTitle(currentFlashcard.answer3, for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -215,14 +287,37 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapOption1(_ sender: Any) {
-        option1.isHidden = true 
+        //option1.isHidden = true
+        
+        //is correct answer flip flashcard, else disable button and show front label
+        if option1 == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            option1.isEnabled = false
+        }
     }
     
     @IBAction func didTapOption2(_ sender: Any) {
+        //is correct answer flip flashcard, else disable button and show front label
+        if option2 == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            option2.isEnabled = false
+        }
     }
     
     @IBAction func didTapOption3(_ sender: Any) {
-        option3.isHidden = true
+       // option3.isHidden = true
+        
+        //is correct answer flip flashcard, else disable button and show front label
+        if option3 == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            option3.isEnabled = false
+        }
     }
     
     //function to store the array
