@@ -1,46 +1,77 @@
 //
-//  AppDelegate.swift
+//  CreationViewController.swift
 //  flashcards
 //
-//  Created by Chia E on 10/19/18.
+//  Created by Chia E on 10/25/18.
 //  Copyright © 2018 Chia E. All rights reserved.
 //
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class CreationViewController: UIViewController {
 
-    var window: UIWindow?
+    var flashcardsController: ViewController!
+    var initialQuestion: String?
+    var initialAnswer: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+        // Do any additional setup after loading the view.
+        questionTextField.text = initialQuestion
+        answerTextField.text = initialAnswer
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    @IBOutlet weak var answerTextField: UITextField!
+    @IBOutlet weak var answerTextField2: UITextField!
+    @IBOutlet weak var answerTextField3: UITextField!
+    @IBOutlet weak var questionTextField: UITextField!
+    
+    @IBAction func didTapOnCancel(_ sender: Any) {
+        dismiss(animated: true)
     }
+    
+    @IBAction func didTapOnDone(_ sender: Any) {
+        //get the text in the question text field
+        let questionText = questionTextField.text
+        
+        //get the text in the answer text field
+        let answerText = answerTextField.text
+        let answerText2 = answerTextField.text
+        let answerText3 = answerTextField.text
+        
+        //check if empty
+        if questionText == nil || answerText == nil || answerText2 == nil || answerText3 == nil || questionText!.isEmpty || answerText!.isEmpty || answerText2!.isEmpty || answerText3!.isEmpty{
+            //show error
+            let alert = UIAlertController(title: "Missing text", message: "Please enter a question and an answer.", preferredStyle: .alert)
+            present(alert, animated: true)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(okAction)
+        }
+        else {
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+            var isExisting = false
+            //see if its existing
+            if initialQuestion != nil {
+                isExisting = true
+            }
+            
+            //call the function to update the flashcard
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, answer2: answerText2!, answer3: answerText3!, isExisting: false)
+            
+            dismiss(animated: true)
+        }
+        
     }
+    /*
+    // MARK: - Navigation
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
+    */
 
 }
-
